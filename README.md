@@ -10,10 +10,10 @@ Please follow the [DeepInteract#installing-psaia](https://github.com/BioinfoMach
 
 ### Genetic databases
 
-In this work, the genetic databases are used to generate the protein complexes.
+In this work, the genetic databases are used to predict the contact map.
 Follow the [DeepInteract#Genetic databases](https://github.com/BioinfoMachineLearning/DeepInteract#genetic-databases),
 you can get the genetic databases easily.
-But the genetic databases are not necessary for the prediction, you can use ```--no_fast``` to generate the protein complexes the genetic databases.
+But the genetic databases are not necessary for the prediction, you can use ```--no_fast``` to generate the protein complexes with the genetic databases.
 If you set the ```--no_fast```, you should change the ```ProTact/utils/data.py``` to set the ```hhsuite_db``` to ```your database path```.
 
 ### Environment
