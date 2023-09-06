@@ -14,6 +14,7 @@ if __name__ == '__main__':
     parser.add_argument("--no_fast", action="store_true", help="Use the slow version with the genetic databases.")
 
     args = parser.parse_args()
+    args.fast = not args.no_fast
     device = args.device
 
     model = ProTact().to(device)
@@ -26,7 +27,7 @@ if __name__ == '__main__':
         state_dict.pop("node_origin_in_embedding.weight")
     model.load_state_dict(state_dict)
 
-    data = get_data(args.left_pdb, args.right_pdb)
+    data = get_data(args.left_pdb, args.right_pdb, args.fast)
 
     graph1 = data["graph1"]
     graph2 = data["graph2"]

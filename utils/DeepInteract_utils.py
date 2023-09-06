@@ -700,7 +700,7 @@ def generate_hhsuite_features(pkl_dataset='datasets/Input/interim/parsed',
                               hhsuite_db='~/Data/Databases/bfd_metaclust_clu_complete_id30_c90_final_seq.sorted_opt',
                               output_dir='datasets/Input/interim/external_feats',
                               num_cpu_jobs=1,
-                              num_cpus_per_job=84,
+                              num_cpus_per_job=1,
                               num_iter=2,
                               source_type='input'):
     """Generate PSAIA features from PDB files."""

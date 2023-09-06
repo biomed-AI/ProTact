@@ -1,6 +1,7 @@
 name: ProTact
 channels:
   - pyg
+  - bioconda
   - pytorch
   - dglteam/label/cu118
   - nvidia
@@ -64,6 +65,7 @@ dependencies:
   - gmp=6.2.1=h295c915_3
   - gmpy2=2.1.2=py39heeb90bb_0
   - gnutls=3.6.15=he1e5248_0
+  - hhsuite=3.3.0=py39pl5321h67e14b5_5
   - idna=3.4=py39h06a4308_0
   - intel-openmp=2023.1.0=hdb19cb5_46305
   - jinja2=3.1.2=py39h06a4308_0
@@ -95,6 +97,7 @@ dependencies:
   - libidn2=2.3.4=h5eee18b_0
   - libnpp=11.8.0.86=0
   - libnpp-dev=11.8.0.86=0
+  - libnsl=2.0.0=h5eee18b_0
   - libnvjpeg=11.9.0.86=0
   - libnvjpeg-dev=11.9.0.86=0
   - libpng=1.6.39=h5eee18b_0
@@ -121,11 +124,12 @@ dependencies:
   - numpy=1.25.0=py39h5f9d8c6_0
   - numpy-base=1.25.0=py39hb5e798b_0
   - openh264=2.1.1=h4ff587b_0
-  - openssl=3.0.9=h7f8727e_0
+  - openssl=3.0.10=h7f8727e_2
   - opt-einsum=3.0.0=py_0
   - opt_einsum_fx=0.1.4=pyhd8ed1ab_0
   - packaging=23.0=py39h06a4308_0
   - pandas=1.5.3=py39h417a72b_0
+  - perl=5.32.1=2_h7f98852_perl5
   - pillow=9.4.0=py39h6a678d5_0
   - pip=23.2.1=py39h06a4308_0
   - pooch=1.4.0=pyhd3eb1b0_0
@@ -135,6 +139,7 @@ dependencies:
   - pysocks=1.7.1=py39h06a4308_0
   - python=3.9.17=h955ad1f_0
   - python-dateutil=2.8.2=pyhd8ed1ab_0
+  - python_abi=3.9=2_cp39
   - pytorch=2.0.1=py3.9_cuda11.8_cudnn8.7.0_0
   - pytorch-cuda=11.8=h7e8668a_5
   - pytorch-mutex=1.0=cuda

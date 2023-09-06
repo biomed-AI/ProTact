@@ -15,7 +15,7 @@ from Bio.PDB.DSSP import dssp_dict_from_pdb_file, DSSP
 from Bio.PDB.Polypeptide import is_aa
 from Bio.PDB.ResidueDepth import ResidueDepth
 from Bio.PDB.vectors import Vector
-from Bio.SCOP.Raf import protein_letters_3to1_extended as protein_letters_3to1
+from Bio.SCOP.Raf import protein_letters_3to1
 from scipy import spatial
 from sklearn.preprocessing import MinMaxScaler
 from tqdm import tqdm
