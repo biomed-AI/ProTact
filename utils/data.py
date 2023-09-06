@@ -13,15 +13,15 @@ from utils.vector_utils import residue_normals, tangent_vectors
 def build_input_graph(left_pdb, right_pdb, fast=True):
     # Please rewrite these dirs to your own dirs
     psaia_dir = '~/Programs/PSAIA_1.0_source/bin/linux/psa'
-    psaia_config = 'datasets/builder/psaia_config_file_input.txt'
+    psaia_config = 'utils/datasets/builder/psaia_config_file_input.txt'
     hhsuite_db = '~/Data/Databases/bfd/bfd_metaclust_clu_complete_id30_c90_final_seq.sorted_opt'
 
     input_id = "Input"
     try:
-        shutil.rmtree(os.path.join('datasets', input_id))
+        shutil.rmtree(os.path.join('utils', 'datasets', input_id))
     except FileNotFoundError:
         pass
-    input_dataset_dir = os.path.join('datasets', input_id)
+    input_dataset_dir = os.path.join('utils', 'datasets', input_id)
 
     input_pair = convert_input_pdb_files_to_pair(
         left_pdb,

@@ -31,6 +31,9 @@ if __name__ == '__main__':
     graph1 = data["graph1"]
     graph2 = data["graph2"]
 
-    contact_map = model(graph1, graph2)
+    y_pred = model(graph1.to(device), graph2.to(device))
 
-    torch.save(contact_map, "contact_map.pt")
+    pred = y_pred[0].contiguous()
+    contact_map = torch.softmax(pred, dim=-1)[:, :, 1]
+
+    torch.save(contact_map.cpu(), "test_contact_map.pt")

@@ -682,10 +682,10 @@ def recover_any_missing_chain_ids(interim_dataset_dir: str, new_pdb_filepath: st
 
 
 def generate_psaia_features(psaia_dir='~/Programs/PSAIA_1.0_source/bin/linux/psa',
-                            psaia_config='datasets/builder/psaia_config_file_input.txt',
-                            pdb_dataset='datasets/Input/raw', pkl_dataset='datasets/Input/interim/parsed',
-                            pruned_dataset='datasets/Input/interim/parsed',
-                            output_dir='datasets/Input/interim/external_feats', source_type='input'):
+                            psaia_config='utils/datasets/builder/psaia_config_file_input.txt',
+                            pdb_dataset='utils/datasets/Input/raw', pkl_dataset='utils/datasets/Input/interim/parsed',
+                            pruned_dataset='utils/datasets/Input/interim/parsed',
+                            output_dir='utils/datasets/Input/interim/external_feats', source_type='input'):
     """Generate PSAIA features from PDB files."""
     logger = logging.getLogger(__name__)
     logger.info(f'Generating PSAIA features from PDB files in {pkl_dataset}')
