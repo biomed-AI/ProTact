@@ -34,6 +34,21 @@ PS: If you want to use the GPU, you should install the CUDA version the same wit
 
 Our model can input the ```*.pdb``` files directly. The ```*.pdb``` files can be downloaded from [Protein Data Bank](https://www.rcsb.org/).
 
+## Reproduce the results
+
+The ```reproduce_result.py``` can reproduce our result in the paper.
+
+```
+# Reproduce the DIPS-Plus test dataset result
+python reproduce_result.py --dataset dips --model model/best_dips.pt --device cuda:0
+
+# Reproduce the CASP13&14 test dataset result
+python reproduce_result.py --dataset casp --model model/best_dips.pt --device cuda:0
+
+# Reproduce the SAbDab test dataset result
+python reproduce_result.py --dataset antibody --model model/best_antibody.pt --device cuda:0
+```
+
 ## Prediction
 
 The ```predict_oneshot.py``` can be used to predict the interface residues of a protein complex. The ```predict_oneshot.py``` will output the predicted contact map in ```contact_map.pt``` format.

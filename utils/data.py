@@ -6,7 +6,7 @@ import atom3.neighbors as nb
 import atom3.pair as pair
 from atom3.structure import get_ca_pos_from_residues
 
-from utils.DeepInteract_utils import convert_input_pdb_files_to_pair, convert_df_to_dgl_graph
+from utils.deepinteract_utils import convert_input_pdb_files_to_pair, convert_df_to_dgl_graph
 from utils.vector_utils import residue_normals, tangent_vectors
 
 
@@ -88,5 +88,11 @@ def get_data(left_pdb, right_pdb, fast=True):
 
     graph1.ndata["nuv"] = nuv1.detach()
     graph2.ndata["nuv"] = nuv2.detach()
+
+    if data['graph1'].num_nodes() < data['graph2'].num_nodes():
+        old_data = data['graph1']
+        data['graph1'] = data['graph2']
+        data['graph2'] = old_data
+        data['examples'] = data['examples'][:, [1, 0, 2]]
 
     return data
