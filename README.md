@@ -44,9 +44,6 @@ python reproduce_result.py --dataset dips --model model/best_dips.pt --device cu
 
 # Reproduce the CASP13&14 test dataset result
 python reproduce_result.py --dataset casp --model model/best_dips.pt --device cuda:0
-
-# Reproduce the SAbDab test dataset result
-python reproduce_result.py --dataset antibody --model model/best_antibody.pt --device cuda:0
 ```
 
 ## Prediction
