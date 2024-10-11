@@ -1,6 +1,6 @@
 # ProTact
 
-Source code for "Accurate and Scalable Protein Interface Prediction through SE(3)-Invariant Geometric Graph Neural Networks"
+Source code for "Accurate Protein Contact Prediction through Surface-informed Geometric Invariant Learning"
 
 ## Install requirements
 
@@ -57,8 +57,11 @@ The ```predict_oneshot.py``` can be used to predict the interface residues of a 
 python predict_oneshot.py --left_pdb examples/1SDU_A.pdb --right_pdb examples/1SDU_B.pdb --model model/best_dips.pt --device cuda:0
 ```
 
+If you set the ```--no_fast```, you should change the ```ProTact/utils/data.py``` to set the ```hhsuite_db``` to ```your database path```.
+
+```
+python predict_oneshot.py --no_fast --left_pdb examples/1SDU_A.pdb --right_pdb examples/1SDU_B.pdb --model model/best_dips.pt --device cuda:0
+```
+
 The pre-trained model can be downloaded [here](https://drive.google.com/drive/folders/1VGF8jsCN4-MXpZ52V6u7SzbJBl0VB4sF?usp=share_link).
 
-## Training
-
-We will release the training code and details soon.

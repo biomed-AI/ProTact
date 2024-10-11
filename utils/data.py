@@ -8,12 +8,14 @@ from atom3.structure import get_ca_pos_from_residues
 
 from utils.deepinteract_utils import convert_input_pdb_files_to_pair, convert_df_to_dgl_graph
 from utils.vector_utils import residue_normals, tangent_vectors
+from utils.dataset import DIPSDGLDataset, CASPCAPRIDGLDataset, DB5DGLDataset, OtherTestDataset
+
 
 
 def build_input_graph(left_pdb, right_pdb, fast=True):
     # Please rewrite these dirs to your own dirs
     psaia_dir = '~/Programs/PSAIA_1.0_source/bin/linux/psa'
-    psaia_config = 'utils/datasets/builder/psaia_config_file_input.txt'
+    psaia_config = '~/Programs/psaia_config_file_input.txt'
     hhsuite_db = '~/Data/Databases/bfd/bfd_metaclust_clu_complete_id30_c90_final_seq.sorted_opt'
 
     input_id = "Input"
@@ -96,3 +98,65 @@ def get_data(left_pdb, right_pdb, fast=True):
         data['examples'] = data['examples'][:, [1, 0, 2]]
 
     return data
+
+
+def get_dataset(dataset_name, raw_dir, logging, nuv=False, nuv_angle=False, protrans=False, esm2=False, paired=False):
+    if dataset_name == "dips":
+        logging.info(f"Protein Protein Docking from DIPS-PLUS by DeepInteract")
+        train = DIPSDGLDataset(raw_dir=raw_dir, mode="train", nuv_residue=nuv, nuv_angle=nuv_angle, protrans=protrans, esm2=esm2)
+        valid = DIPSDGLDataset(raw_dir=raw_dir, mode="val", nuv_residue=nuv, nuv_angle=nuv_angle, protrans=protrans, esm2=esm2)
+        test = DIPSDGLDataset(raw_dir=raw_dir, mode="test", nuv_residue=nuv, nuv_angle=nuv_angle, protrans=protrans, esm2=esm2)
+        all_pocket_test = None
+        info = None
+        return train, None, valid, test, all_pocket_test, info
+    elif dataset_name == "casp":
+        train = None
+        valid = None
+        test = CASPCAPRIDGLDataset(raw_dir=raw_dir, mode="test", nuv_residue=nuv, nuv_angle=nuv_angle)
+        all_pocket_test = None
+        info = None
+        return train, None, valid, test, all_pocket_test, info
+    elif dataset_name[:6] == "casp15":
+        train = None
+        valid = None
+        test = OtherTestDataset(raw_dir=raw_dir, mode="test", nuv_residue=nuv, nuv_angle=nuv_angle, task=dataset_name)
+        all_pocket_test = None
+        info = None
+        return train, None, valid, test, all_pocket_test, info
+    elif dataset_name == "db5":
+        train = DB5DGLDataset(raw_dir=raw_dir, mode="train", nuv_residue=nuv, nuv_angle=nuv_angle)
+        valid = DB5DGLDataset(raw_dir=raw_dir, mode="val", nuv_residue=nuv, nuv_angle=nuv_angle)
+        test = DB5DGLDataset(raw_dir=raw_dir, mode="test", nuv_residue=nuv, nuv_angle=nuv_angle)
+        all_pocket_test = None
+        info = None
+        return train, None, valid, test, all_pocket_test, info
+    elif dataset_name == "antibody":
+        train = OtherTestDataset(raw_dir=raw_dir, mode="train", nuv_residue=nuv, nuv_angle=nuv_angle, task=dataset_name)
+        valid = OtherTestDataset(raw_dir=raw_dir, mode="val", nuv_residue=nuv, nuv_angle=nuv_angle, task=dataset_name)
+        test = OtherTestDataset(raw_dir=raw_dir, mode="test", nuv_residue=nuv, nuv_angle=nuv_angle, task=dataset_name)
+        all_pocket_test = None
+        info = None
+        return train, None, valid, test, all_pocket_test, info
+    elif dataset_name == "db5.5":
+        train = OtherTestDataset(raw_dir=raw_dir, mode="train", nuv_residue=nuv, nuv_angle=nuv_angle, task=dataset_name)
+        valid = OtherTestDataset(raw_dir=raw_dir, mode="val", nuv_residue=nuv, nuv_angle=nuv_angle, task=dataset_name)
+        test = OtherTestDataset(raw_dir=raw_dir, mode="test", nuv_residue=nuv, nuv_angle=nuv_angle, task=dataset_name)
+        all_pocket_test = None
+        info = None
+        return train, None, valid, test, all_pocket_test, info
+    elif dataset_name == "db5.5_all":
+        train = None
+        valid = None
+        test = OtherTestDataset(raw_dir=raw_dir, mode="all", nuv_residue=nuv, nuv_angle=nuv_angle, task=dataset_name)
+        all_pocket_test = None
+        info = None
+        return train, None, valid, test, all_pocket_test, info
+    elif dataset_name == "timesplits":
+        train = OtherTestDataset(raw_dir=raw_dir, mode="train", nuv_residue=nuv, nuv_angle=nuv_angle, task=dataset_name, esm2=esm2, paired=paired)
+        valid = OtherTestDataset(raw_dir=raw_dir, mode="val", nuv_residue=nuv, nuv_angle=nuv_angle, task=dataset_name, esm2=esm2, paired=paired)
+        test = OtherTestDataset(raw_dir=raw_dir, mode="test", nuv_residue=nuv, nuv_angle=nuv_angle, task=dataset_name, esm2=esm2, paired=paired)
+        all_pocket_test = None
+        info = None
+        return train, None, valid, test, all_pocket_test, info
+    else: 
+        raise NotImplementedError()

@@ -293,6 +293,7 @@ class TriangleModule(nn.Module):
         super(TriangleModule, self).__init__()
         self.output_emb = output_emb
         self.dropout = nn.Dropout2d(p=0.25)
+        self.pair_input = nn.Linear(146, embedding_channels)
         self.n_trigonometry_module_stack = n_trigonometry_module_stack
         self.trigonometry_update_list = nn.ModuleList([
             TrigonometryUpdate(embedding_channels=embedding_channels, c=c)
@@ -316,7 +317,11 @@ class TriangleModule(nn.Module):
         self.output.bias = nn.Parameter(final_layer_bias, requires_grad=True)
 
     def forward(self, graph1: dgl.DGLGraph, graph2: dgl.DGLGraph):
-        z = torch.einsum("...ik,...jk->...ijk", graph1.ndata["f"], graph2.ndata["f"])
+        if 'pair_feats' not in graph1.ndata:
+            z = torch.einsum("...ik,...jk->...ijk", graph1.ndata["f"], graph2.ndata["f"])
+        else:
+            z = self.pair_input(graph1.ndata['pair_feats']) + torch.einsum("...ik,...jk->...ijk", graph1.ndata["f"], graph2.ndata["f"])
+    
         for i_module in range(self.n_trigonometry_module_stack):
             z = z + self.dropout(
                     self.trigonometry_update_list[i_module](
